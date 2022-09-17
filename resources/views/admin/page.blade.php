@@ -1,11 +1,11 @@
-@extends('frontend.master')
+@extends('admin.master')
 
-@section('pagecss')
+@section('page-css')
 @endsection
 
 @section('mainContent')
 
 @endsection
 
-@section('pagejs')
+@section('page-js')
 @endsection
