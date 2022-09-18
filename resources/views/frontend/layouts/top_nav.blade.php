@@ -21,10 +21,10 @@
                         <a class="nav-link dropdown-toggle" href="#">Categories</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('frontend.category') }}">Category</a></li>
-                            <li><a class="dropdown-item" href="#">Blog Single</a></li>
-                            <li><a class="dropdown-item" href="#">Blog Single Alt</a></li>
-                            <li><a class="dropdown-item" href="#">About</a></li>
-                            <li><a class="dropdown-item" href="#">Contact</a></li>
+                            @php $category = getNavCategory() @endphp
+                            @foreach($category as $name)
+                            <li><a class="dropdown-item" href="#">{{ $name }}</a></li>
+                            @endforeach
                         </ul>
                     </li>
                     <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
