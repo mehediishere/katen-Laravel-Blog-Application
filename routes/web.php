@@ -26,6 +26,9 @@ use Illuminate\Support\Facades\Route;
 Route::controller(\App\Http\Controllers\BlogController::class)->group(function(){
     Route::get('/', 'index')->name('frontend.index');
     Route::get('/category', 'category')->name('frontend.category');
+    Route::get('/single-blog', 'blogSingle')->name('frontend.blog-single');
+    Route::get('/about', 'about')->name('frontend.about');
+    Route::get('/contact', 'contact')->name('frontend.contact');
 
     Route::get('/create-new-post', 'createNewPost')->name('admin.index');
     Route::post('/new-post', 'newPost')->name('new.post');

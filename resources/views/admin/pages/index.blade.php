@@ -37,7 +37,7 @@
             <span class="text-danger">@error('publishDate') {{ $message }} @enderror</span>
             <textarea id="summernote" name="editordata">{{ old('editordata') }}</textarea>
             <span class="text-danger">@error('editordata') {{ $message }} @enderror</span><br>
-            <button class="btn rounded-pill text-white fw-bold mt-2" style="background: linear-gradient(to right, #FE4F70 0%, #FFA387 100%);">Publish</button>
+            <button class="btn rounded-pill text-white fw-bold mt-2" style="background: linear-gradient(to right, #FE4F70 0%, #FFA387 100%);">PUBLISH</button>
         </div>
     </form>
 </main>

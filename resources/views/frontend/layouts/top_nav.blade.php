@@ -8,30 +8,30 @@
             <div class="collapse navbar-collapse">
                 <!-- menus -->
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown active">
-                        <a class="nav-link" href="index.html">Home</a>
+                    <li class="nav-item {{ (request()->is('/')) ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('frontend.index') }}">Home</a>
+                    </li>
+                    <li class="nav-item {{ request()->is('single-blog') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('frontend.blog-single') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="category.html">Blog</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="category.html">Video</a>
+                        <a class="nav-link" href="#">Video</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#">Categories</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="category.html">Category</a></li>
-                            <li><a class="dropdown-item" href="blog-single.html">Blog Single</a></li>
-                            <li><a class="dropdown-item" href="blog-single-alt.html">Blog Single Alt</a></li>
-                            <li><a class="dropdown-item" href="about.html">About</a></li>
-                            <li><a class="dropdown-item" href="contact.html">Contact</a></li>
+                            <li><a class="dropdown-item" href="{{ route('frontend.category') }}">Category</a></li>
+                            <li><a class="dropdown-item" href="#">Blog Single</a></li>
+                            <li><a class="dropdown-item" href="#">Blog Single Alt</a></li>
+                            <li><a class="dropdown-item" href="#">About</a></li>
+                            <li><a class="dropdown-item" href="#">Contact</a></li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">About</a>
+                    <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('frontend.about') }}">About</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact</a>
+                    <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
+                        <a class="nav-link" href="{{ route('frontend.contact') }}">Contact</a>
                     </li>
                 </ul>
             </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\BlogCategories;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -16,7 +17,8 @@ class BlogController extends Controller
     }
 
     function createNewPost(){
-        return view('admin.pages.index');
+        $categoryList = BlogCategories::all();
+        return view('admin.pages.index', $categoryList);
     }
 
     function newPost(Request $request){
@@ -27,7 +29,7 @@ class BlogController extends Controller
             'publishDate'=>'required',
             'editordata'=>'required',
         ]);
-        
+
         $tag = implode(',', $request->input('tags'));
 
         Blog::create([
@@ -39,6 +41,18 @@ class BlogController extends Controller
         ]);
 
         return back();
+    }
+
+    function blogSingle(){
+        return view('frontend.pages.blog-single');
+    }
+
+    function contact(){
+        return view('frontend.pages.contact');
+    }
+
+    function about(){
+        return view('frontend.pages.about');
     }
 
 }
