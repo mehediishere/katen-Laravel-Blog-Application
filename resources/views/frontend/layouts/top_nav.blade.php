@@ -15,15 +15,15 @@
                         <a class="nav-link" href="{{ route('frontend.blog-single') }}">Blog</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Video</a>
+                        <a class="nav-link" href="{{ route('admin.index') }}">cPanel</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown {{ request()->is('category') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#">Categories</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="{{ route('frontend.category') }}">Category</a></li>
-                            @php $category = getNavCategory() @endphp
-                            @foreach($category as $name)
-                            <li><a class="dropdown-item" href="#">{{ $name }}</a></li>
+                            @php $categorys = getCategory() @endphp
+                            @foreach($categorys as $category)
+                            <li><a class="dropdown-item text-capitalize" href="{{ route('frontend.single.category', ['category'=>$category]) }}">{{ $category }}</a></li>
                             @endforeach
                         </ul>
                     </li>

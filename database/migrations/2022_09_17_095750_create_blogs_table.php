@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('tags');
             $table->text('post_details');
-            $table->timestamp('publish_date');
+            $table->date('publish_date');
             $table->timestamps();
         });
     }

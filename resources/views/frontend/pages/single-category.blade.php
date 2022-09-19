@@ -18,13 +18,13 @@
                             <!-- post -->
                             <div class="post post-grid rounded bordered">
                                 <div class="thumb top-rounded">
-                                    <a href="category.html" class="category-badge position-absolute text-capitalize">{{ $blog->category }}</a>
+                                    <a href="{{ route('frontend.single.category', ['category'=>$blog->category]) }}" class="category-badge position-absolute text-capitalize">{{ $blog->category }}</a>
                                     <span class="post-format">
                                         <i class="icon-picture"></i>
                                     </span>
                                     <a href="blog-single.html">
                                         <div class="inner">
-                                            <img src="frontend/images/posts/post-md-1.jpg" alt="post-title" />
+                                            <img src="{{ asset('frontend/images/posts/post-md-1.jpg') }}" alt="post-title" />
                                         </div>
                                     </a>
                                 </div>

@@ -19,11 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::controller(\App\Http\Controllers\BlogController::class)->group(function(){
     Route::get('/', 'index')->name('frontend.index');
     Route::get('/category', 'category')->name('frontend.category');
-    Route::get('/single-blog', 'blogSingle')->name('frontend.blog-single');
+    Route::get('/category/{category}', 'singleCategory')->name('frontend.single.category');
+    Route::get('/single-blog/', 'blogSingle')->name('frontend.blog-single');
+    Route::get('/post/{id}/{title}', 'singlePost')->name('frontend.post');
     Route::get('/about', 'about')->name('frontend.about');
     Route::get('/contact', 'contact')->name('frontend.contact');
 
     Route::get('/cpanel', 'createNewPost')->name('admin.index');
     Route::post('/new-post', 'newPost')->name('new.post');
+    Route::get('/all-post', 'allPost')->name('admin.allpost');
 
 });

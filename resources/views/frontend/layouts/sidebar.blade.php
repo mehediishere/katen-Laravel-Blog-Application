@@ -2,7 +2,7 @@
 <div class="sidebar">
     <!-- widget about -->
     <div class="widget rounded">
-        <div class="widget-about data-bg-image text-center" data-bg-image="frontend/images/map-bg.png">
+        <div class="widget-about data-bg-image text-center" data-bg-image="{{ asset('frontend/images/map-bg.png') }}">
             <img src="{{ asset('frontend/images/logo.svg') }}" alt="logo" class="mb-4" />
             <p class="mb-4">Hello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
             <ul class="social-icons list-unstyled list-inline mb-0">
@@ -20,7 +20,7 @@
     <div class="widget rounded">
         <div class="widget-header text-center">
             <h3 class="widget-title">Popular Posts</h3>
-            <img src="frontend/images/wave.svg" class="wave" alt="wave" />
+            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
         </div>
         <div class="widget-content">
             <!-- post -->
@@ -29,7 +29,7 @@
                     <span class="number">1</span>
                     <a href="blog-single.html">
                         <div class="inner">
-                            <img src="frontend/images/posts/tabs-1.jpg" alt="post-title" />
+                            <img src="{{ asset('frontend/images/posts/tabs-1.jpg') }}" alt="post-title" />
                         </div>
                     </a>
                 </div>
@@ -46,7 +46,7 @@
                     <span class="number">2</span>
                     <a href="blog-single.html">
                         <div class="inner">
-                            <img src="frontend/images/posts/tabs-2.jpg" alt="post-title" />
+                            <img src="{{ asset('frontend/images/posts/tabs-2.jpg') }}" alt="post-title" />
                         </div>
                     </a>
                 </div>
@@ -63,7 +63,7 @@
                     <span class="number">3</span>
                     <a href="blog-single.html">
                         <div class="inner">
-                            <img src="frontend/images/posts/tabs-3.jpg" alt="post-title" />
+                            <img src="{{ asset('frontend/images/posts/tabs-3.jpg') }}" alt="post-title" />
                         </div>
                     </a>
                 </div>
@@ -81,16 +81,17 @@
     <div class="widget rounded">
         <div class="widget-header text-center">
             <h3 class="widget-title">Explore Topics</h3>
-            <img src="frontend/images/wave.svg" class="wave" alt="wave" />
+            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
         </div>
         <div class="widget-content">
             <ul class="list">
-                <li><a href="#">Lifestyle</a><span>(5)</span></li>
-                <li><a href="#">Inspiration</a><span>(2)</span></li>
-                <li><a href="#">Fashion</a><span>(4)</span></li>
-                <li><a href="#">Politic</a><span>(1)</span></li>
-                <li><a href="#">Trending</a><span>(7)</span></li>
-                <li><a href="#">Culture</a><span>(3)</span></li>
+                @php $categorys = getCategory(); @endphp
+                @foreach($categorys as $category)
+                    @php
+                        $count = \App\Models\Blog::select('category')->where('category', $category)->count();
+                    @endphp
+                <li class="text-capitalize"><a href="{{ route('frontend.single.category', ['category'=>$category]) }}">{{ $category }}</a><span>({{ $count }})</span></li>
+                @endforeach
             </ul>
         </div>
 
@@ -100,7 +101,7 @@
     <div class="widget rounded">
         <div class="widget-header text-center">
             <h3 class="widget-title">Newsletter</h3>
-            <img src="frontend/images/wave.svg" class="wave" alt="wave" />
+            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
         </div>
         <div class="widget-content">
             <span class="newsletter-headline text-center mb-3">Join 70,000 subscribers!</span>
@@ -118,7 +119,7 @@
     <div class="widget rounded">
         <div class="widget-header text-center">
             <h3 class="widget-title">Celebration</h3>
-            <img src="frontend/images/wave.svg" class="wave" alt="wave" />
+            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
         </div>
         <div class="widget-content">
             <div class="post-carousel-widget">
@@ -128,7 +129,7 @@
                         <a href="category.html" class="category-badge position-absolute">How to</a>
                         <a href="blog-single.html">
                             <div class="inner">
-                                <img src="frontend/images/widgets/widget-carousel-1.jpg" alt="post-title" />
+                                <img src="{{ asset('frontend/images/widgets/widget-carousel-1.jpg') }}" alt="post-title" />
                             </div>
                         </a>
                     </div>
@@ -144,7 +145,7 @@
                         <a href="category.html" class="category-badge position-absolute">Trending</a>
                         <a href="blog-single.html">
                             <div class="inner">
-                                <img src="frontend/images/widgets/widget-carousel-2.jpg" alt="post-title" />
+                                <img src="{{ asset('frontend/images/widgets/widget-carousel-2.jpg') }}" alt="post-title" />
                             </div>
                         </a>
                     </div>

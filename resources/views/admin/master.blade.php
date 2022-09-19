@@ -16,7 +16,7 @@
     @yield('page-css')
 </head>
 <body>
-
+    @include('admin.layouts.top-nav')
     @yield('mainContent')
 
     {{-- JS --}}

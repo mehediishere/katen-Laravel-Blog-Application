@@ -13,7 +13,13 @@ class BlogController extends Controller
     }
 
     function category(){
-        return view('frontend.pages.category');
+        $blogs = Blog::all();
+        return view('frontend.pages.category', ['blogs'=>$blogs]);
+    }
+
+    function singleCategory($category){
+        $blogs = Blog::where('category', $category)->get();
+        return view('frontend.pages.single-category', ['blogs'=>$blogs]);
     }
 
     function createNewPost(){
@@ -47,12 +53,22 @@ class BlogController extends Controller
         return view('frontend.pages.blog-single');
     }
 
+    function singlePost($id, $title){
+        $post = Blog::where('id', $id)->first();
+        return view('frontend.pages.blog-single', ['post'=>$post]);
+    }
+
     function contact(){
         return view('frontend.pages.contact');
     }
 
     function about(){
         return view('frontend.pages.about');
+    }
+
+    function allPost(){
+        $blogs = Blog::all();
+        return view('admin.pages.all-posts', ['blogs'=>$blogs]);
     }
 
 }
