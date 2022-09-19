@@ -12,14 +12,14 @@
             <input type="text" class="form-control" name="title" placeholder="Title" value="{{ old('title') }}">
             <span class="text-danger">@error('title') {{ $message }} @enderror</span>
             <div class="my-2">
+                @php
+                    $cat = getNavCategory();
+                @endphp
                 <select class="select2category form-control" name="category">
                     <option value="{{ old('category') }}">{{ old('category') }}</option>
-                    <option value="web development">web development</option>
-                    <option value="programming">programming</option>
-                    <option value="technology">technology</option>
-                    <option value="unity game engine">unity game engine</option>
-                    <option value="graphics design">graphics design</option>
-                    <option value="other">other</option>
+                    @foreach($cat as $item)
+                        <option value="{{ $item }}">{{ $item }}</option>
+                    @endforeach
                 </select>
                 <span class="text-danger">@error('category') {{ $message }} @enderror</span>
             </div>

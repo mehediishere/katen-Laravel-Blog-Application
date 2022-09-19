@@ -32,7 +32,7 @@
             "Tests\\": "tests/"
         },
         "files": [
-            "app/Helpers/NavCat.php"
+            "app/Helpers/common.php"
         ]
     },
     "scripts": {
