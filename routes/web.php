@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //Blog
 Route::controller(\App\Http\Controllers\BlogController::class)->group(function(){
     Route::get('/', 'index')->name('frontend.index');
-    Route::get('/category', 'category')->name('frontend.category');
+    Route::get('/all-posts', 'allCategory')->name('frontend.allpost');
     Route::get('/category/{category}', 'singleCategory')->name('frontend.single.category');
     Route::get('/single-blog/', 'blogSingle')->name('frontend.blog-single');
     Route::get('/post/{id}/{title}', 'singlePost')->name('frontend.post');

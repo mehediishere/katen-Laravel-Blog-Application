@@ -9,7 +9,6 @@
         <div class="container-xl">
 
             <div class="row gy-4">
-
                 <div class="col-lg-8">
 
                     <div class="row gy-4">
@@ -69,12 +68,9 @@
 
                 </div>
                 <div class="col-lg-4">
-
                     <!-- sidebar -->
                     @include('frontend.layouts.sidebar')
-
                 </div>
-
             </div>
 
         </div>

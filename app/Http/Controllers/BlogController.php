@@ -12,7 +12,7 @@ class BlogController extends Controller
         return view('frontend.pages.index');
     }
 
-    function category(){
+    function allCategory(){
         $blogs = Blog::all();
         return view('frontend.pages.category', ['blogs'=>$blogs]);
     }

@@ -12,7 +12,7 @@
                         <a class="nav-link" href="{{ route('frontend.index') }}">Home</a>
                     </li>
                     <li class="nav-item {{ request()->is('single-blog') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('frontend.blog-single') }}">Blog</a>
+                        <a class="nav-link" href="{{ route('frontend.allpost') }}">Blog</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.index') }}">cPanel</a>
@@ -20,7 +20,6 @@
                     <li class="nav-item dropdown {{ request()->is('category') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#">Categories</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="{{ route('frontend.category') }}">Category</a></li>
                             @php $categorys = getCategory() @endphp
                             @foreach($categorys as $category)
                             <li><a class="dropdown-item text-capitalize" href="{{ route('frontend.single.category', ['category'=>$category]) }}">{{ $category }}</a></li>
