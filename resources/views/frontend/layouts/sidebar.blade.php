@@ -1,7 +1,7 @@
 <!-- sidebar -->
 <div class="sidebar">
     <!-- widget about -->
-    <div class="widget rounded">
+    <!-- <div class="widget rounded">
         <div class="widget-about data-bg-image text-center" data-bg-image="{{ asset('frontend/images/map-bg.png') }}">
             <img src="{{ asset('frontend/images/logo.svg') }}" alt="logo" class="mb-4" />
             <p class="mb-4">Hello, We’re content writer who is fascinated by content fashion, celebrity and lifestyle. We helps clients bring the right content to the right people.</p>
@@ -13,6 +13,24 @@
                 <li class="list-inline-item"><a href="#"><i class="fab fa-medium"></i></a></li>
                 <li class="list-inline-item"><a href="#"><i class="fab fa-youtube"></i></a></li>
             </ul>
+        </div>
+    </div> -->
+
+    <!-- widget newsletter -->
+    <div class="widget rounded">
+        <div class="widget-header text-center">
+            <h3 class="widget-title">Newsletter</h3>
+            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
+        </div>
+        <div class="widget-content">
+            <span class="newsletter-headline text-center mb-3">Join 70,000 subscribers!</span>
+            <form>
+                <div class="mb-2">
+                    <input class="form-control w-100 text-center" placeholder="Email address…" type="email">
+                </div>
+                <button class="btn btn-default btn-full" type="submit">Sign Up</button>
+            </form>
+            <span class="newsletter-privacy text-center mt-3">By signing up, you agree to our <a href="#">Privacy Policy</a></span>
         </div>
     </div>
 
@@ -97,24 +115,6 @@
 
     </div>
 
-    <!-- widget newsletter -->
-    <div class="widget rounded">
-        <div class="widget-header text-center">
-            <h3 class="widget-title">Newsletter</h3>
-            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
-        </div>
-        <div class="widget-content">
-            <span class="newsletter-headline text-center mb-3">Join 70,000 subscribers!</span>
-            <form>
-                <div class="mb-2">
-                    <input class="form-control w-100 text-center" placeholder="Email address…" type="email">
-                </div>
-                <button class="btn btn-default btn-full" type="submit">Sign Up</button>
-            </form>
-            <span class="newsletter-privacy text-center mt-3">By signing up, you agree to our <a href="#">Privacy Policy</a></span>
-        </div>
-    </div>
-
     <!-- widget post carousel -->
     <div class="widget rounded">
         <div class="widget-header text-center">
@@ -161,7 +161,7 @@
                         <a href="category.html" class="category-badge position-absolute">How to</a>
                         <a href="blog-single.html">
                             <div class="inner">
-                                <img src="frontend/images/widgets/widget-carousel-1.jpg" alt="post-title" />
+                                <img src="{{ asset('frontend/images/widgets/widget-carousel-1.jpg') }}" alt="post-title" />
                             </div>
                         </a>
                     </div>
@@ -184,7 +184,7 @@
     <div class="widget no-container rounded text-md-center">
         <span class="ads-title">- Sponsored Ad -</span>
         <a href="#" class="widget-ads">
-            <img src="frontend/images/ads/ad-360.png" alt="Advertisement" />
+            <img src="{{ asset('frontend/images/ads/ad-360.png') }}" alt="Advertisement" />
         </a>
     </div>
 
@@ -192,14 +192,13 @@
     <div class="widget rounded">
         <div class="widget-header text-center">
             <h3 class="widget-title">Tag Clouds</h3>
-            <img src="frontend/images/wave.svg" class="wave" alt="wave" />
+            <img src="{{ asset('frontend/images/wave.svg') }}" class="wave" alt="wave" />
         </div>
         <div class="widget-content">
-            <a href="#" class="tag">#Trending</a>
-            <a href="#" class="tag">#Video</a>
-            <a href="#" class="tag">#Featured</a>
-            <a href="#" class="tag">#Gallery</a>
-            <a href="#" class="tag">#Celebrities</a>
+            @php $tags = getTags(); @endphp
+            @foreach ($tags as $tag)
+            <a href="{{ route('frontend.tag.posts', ['tag'=>$tag->tag]) }}" class="tag text-capitalize">#{{ $tag->tag }}</a>
+            @endforeach
         </div>
     </div>
 

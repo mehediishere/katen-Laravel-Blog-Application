@@ -13,7 +13,7 @@
             <span class="text-danger">@error('title') {{ $message }} @enderror</span>
             <div class="my-2">
                 @php
-                    $cat = getNavCategory();
+                    $cat = getCategory();
                 @endphp
                 <select class="select2category form-control" name="category">
                     <option value="{{ old('category') }}">{{ old('category') }}</option>

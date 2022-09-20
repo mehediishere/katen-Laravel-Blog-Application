@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\BlogCategories;
+use App\Models\Tags;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class BlogController extends Controller
 {
@@ -13,12 +15,17 @@ class BlogController extends Controller
     }
 
     function allCategory(){
-        $blogs = Blog::all();
+        $blogs = Blog::orderBy('id', 'desc')->get();
         return view('frontend.pages.category', ['blogs'=>$blogs]);
     }
 
     function singleCategory($category){
         $blogs = Blog::where('category', $category)->get();
+        return view('frontend.pages.single-category', ['blogs'=>$blogs]);
+    }
+
+    function tagPosts($tag){
+        $blogs = Blog::where('tags', 'LIKE', '%'.$tag.'%')->get();
         return view('frontend.pages.single-category', ['blogs'=>$blogs]);
     }
 
@@ -35,6 +42,18 @@ class BlogController extends Controller
             'publishDate'=>'required',
             'editordata'=>'required',
         ]);
+
+        foreach ($request->tags as $tag){
+            $check = Tags::where('tag', $tag)->first(); // This will return `true` if found, otherwise `false`
+            if(!$check){
+                Tags::create([
+                    'tag' => $tag,
+                    'total' => 1
+                ]);
+            }else{
+                Tags::where('tag', $tag)->increment('total', 1);
+            }
+        }
 
         $tag = implode(',', $request->input('tags'));
 

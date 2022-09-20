@@ -23,7 +23,7 @@
         @include('frontend.layouts.preloader')
         @include('frontend.layouts.top_nav')
         @yield('mainContent')
-        @include('frontend.layouts.instagram_feed')
+{{--        @include('frontend.layouts.instagram_feed')--}}
         @include('frontend.layouts.footer')
     </div>
     <!-- end site wrapper -->

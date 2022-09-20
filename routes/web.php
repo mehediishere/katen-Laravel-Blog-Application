@@ -20,6 +20,7 @@ Route::controller(\App\Http\Controllers\BlogController::class)->group(function()
     Route::get('/', 'index')->name('frontend.index');
     Route::get('/all-posts', 'allCategory')->name('frontend.allpost');
     Route::get('/category/{category}', 'singleCategory')->name('frontend.single.category');
+    Route::get('/tag/{tag}', 'tagPosts')->name('frontend.tag.posts');
     Route::get('/single-blog/', 'blogSingle')->name('frontend.blog-single');
     Route::get('/post/{id}/{title}', 'singlePost')->name('frontend.post');
     Route::get('/about', 'about')->name('frontend.about');
