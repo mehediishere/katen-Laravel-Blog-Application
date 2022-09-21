@@ -41,7 +41,10 @@ class BlogController extends Controller
             'tags'=>'required',
             'publishDate'=>'required',
             'editordata'=>'required',
+            'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ]);
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
 
         foreach ($request->tags as $tag){
             $check = Tags::where('tag', $tag)->first(); // This will return `true` if found, otherwise `false`

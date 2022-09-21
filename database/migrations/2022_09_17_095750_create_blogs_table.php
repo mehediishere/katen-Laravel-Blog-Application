@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('category');
             $table->string('tags');
+            $table->string('feature_image');
             $table->text('post_details');
             $table->date('publish_date');
             $table->timestamps();

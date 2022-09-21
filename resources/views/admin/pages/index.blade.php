@@ -25,16 +25,16 @@
             </div>
             <select class="select2tags form-control" name="tags[]" multiple="multiple">
                 <option></option>
-                <option value="html">html</option>
-                <option value="css">css</option>
-                <option value="php">php</option>
-                <option value="medium">medium</option>
-                <option value="webdesign">webdesign</option>
-                <option value="adobe">adobe</option>
+                @php $tags = getTags(); @endphp
+                @foreach ($tags as $tag)
+                <option value="{{ $tag->tag }}">{{ $tag->tag }} ({{ $tag->total }})</option>
+                @endforeach
             </select>
             <span class="text-danger">@error('tags') {{ $message }} @enderror</span>
             <input type="date" class="form-control my-2" name="publishDate" value="{{ old('publishDate') }}">
             <span class="text-danger">@error('publishDate') {{ $message }} @enderror</span>
+            <input class="form-control" type="file" id="formFile" name="image">
+            <span class="text-danger">@error('image') {{ $message }} @enderror</span><br>
             <textarea id="summernote" name="editordata">{{ old('editordata') }}</textarea>
             <span class="text-danger">@error('editordata') {{ $message }} @enderror</span><br>
             <button class="btn rounded-pill text-white fw-bold mt-2" style="background: linear-gradient(to right, #FE4F70 0%, #FFA387 100%);">PUBLISH</button>
