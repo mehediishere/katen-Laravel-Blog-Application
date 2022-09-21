@@ -33,7 +33,7 @@
                                         <li class="list-inline-item">{{ date('d M Y', strtotime($blog->publish_date)) }}</li>
                                     </ul>
                                     <h5 class="post-title mb-3 mt-3"><a href="{{ route('frontend.post', ['title'=>$blog->title, 'id'=>$blog->id]) }}">{{ $blog->title }}</a></h5>
-                                    <p class="excerpt mb-0">{!! substr($blog->post_details, 0, 90) !!}</p>
+                                    <p class="excerpt mb-0">{{ \Illuminate\Support\Str::words(strip_tags($blog->post_details), 25, '...') }}</p>
                                 </div>
                                 <div class="post-bottom clearfix d-flex align-items-center">
                                     <div class="social-share me-auto">
@@ -56,15 +56,8 @@
                         @endforeach
                     </div>
 
-                    <nav>
-                        <ul class="pagination justify-content-center">
-                            <li class="page-item active" aria-current="page">
-                                <span class="page-link">1</span>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                        </ul>
-                    </nav>
+                    <!-- Pagination -->
+                    {{ $blogs->links('frontend.layouts.pagination') }}
 
                 </div>
                 <div class="col-lg-4">

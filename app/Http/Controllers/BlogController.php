@@ -15,18 +15,18 @@ class BlogController extends Controller
     }
 
     function allCategory(){
-        $blogs = Blog::orderBy('id', 'desc')->get();
-        return view('frontend.pages.category', ['blogs'=>$blogs]);
+        $blogs = Blog::orderBy('id', 'desc')->paginate(4);
+        return view('frontend.pages.all-posts', ['blogs'=>$blogs]);
     }
 
     function singleCategory($category){
-        $blogs = Blog::where('category', $category)->get();
-        return view('frontend.pages.single-category', ['blogs'=>$blogs]);
+        $blogs = Blog::where('category', $category)->orderBy('id', 'desc')->paginate(4);
+        return view('frontend.pages.search-posts', ['blogs'=>$blogs]);
     }
 
     function tagPosts($tag){
-        $blogs = Blog::where('tags', 'LIKE', '%'.$tag.'%')->get();
-        return view('frontend.pages.single-category', ['blogs'=>$blogs]);
+        $blogs = Blog::where('tags', 'LIKE', '%'.$tag.'%')->orderBy('id', 'desc')->paginate(4);
+        return view('frontend.pages.search-posts', ['blogs'=>$blogs]);
     }
 
     function createNewPost(){
@@ -41,10 +41,15 @@ class BlogController extends Controller
             'tags'=>'required',
             'publishDate'=>'required',
             'editordata'=>'required',
-            'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
+            'uploadFile'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048'
         ]);
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move(public_path('images'), $imageName);
+
+        if(!empty($request->uploadFile)){
+            $imageName = rand(111, 9999).preg_replace("/\s+/", "", $request->title).'.'.$request->uploadFile->extension();
+            $request->uploadFile->move(public_path('frontend/blog_feature'), $imageName);
+        }else{
+            $imageName = null;
+        }
 
         foreach ($request->tags as $tag){
             $check = Tags::where('tag', $tag)->first(); // This will return `true` if found, otherwise `false`
@@ -65,7 +70,8 @@ class BlogController extends Controller
             'category'=>$request->input('category'),
             'tags'=>$tag,
             'publish_date'=>$request->input('publishDate'),
-            'post_details'=>$request->input('editordata')
+            'post_details'=>$request->input('editordata'),
+            'feature_image'=>$imageName
         ]);
 
         return back();
@@ -91,6 +97,13 @@ class BlogController extends Controller
     function allPost(){
         $blogs = Blog::all();
         return view('admin.pages.all-posts', ['blogs'=>$blogs]);
+    }
+
+    function searchPost(Request $request){
+        $search = $request->search;
+        $result = Blog::where('title', 'like', '%'.$search.'%')->orWhere('category', 'like', '%'.$search.'%')->orWhere('tags', 'like', '%'.$search.'%')->paginate(10);
+        return view('frontend.pages.search-posts', ['blogs'=>$result]);
+
     }
 
 }

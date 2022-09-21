@@ -26,7 +26,6 @@
                             <h1 class="title mt-0 mb-3">{{ $post->title }}</h1>
                             <ul class="meta list-inline mb-0">
                                 <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/other/author-sm.png') }}" class="author" alt="author"/>Katen Doe</a></li>
-                                <li class="list-inline-item"><a href="#">Trending</a></li>
                                 <li class="list-inline-item">{{ date('d M Y', strtotime($post->publish_date)) }}</li>
                             </ul>
                         </div>

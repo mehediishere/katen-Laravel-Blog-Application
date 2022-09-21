@@ -5,7 +5,7 @@
 
 @section('mainContent')
 <main class="container">
-    <form action="{{ route('new.post') }}" method="POST">
+    <form action="{{ route('new.post') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="px-5">
             <h3 class="text-uppercase fw-bold" style="color: #203656">New Post</h3>
@@ -33,8 +33,8 @@
             <span class="text-danger">@error('tags') {{ $message }} @enderror</span>
             <input type="date" class="form-control my-2" name="publishDate" value="{{ old('publishDate') }}">
             <span class="text-danger">@error('publishDate') {{ $message }} @enderror</span>
-            <input class="form-control" type="file" id="formFile" name="image">
-            <span class="text-danger">@error('image') {{ $message }} @enderror</span><br>
+            <input class="form-control" type="file" id="formFile" name="uploadFile">
+            <span class="text-danger">@error('uploadFile') {{ $message }} @enderror</span><br>
             <textarea id="summernote" name="editordata">{{ old('editordata') }}</textarea>
             <span class="text-danger">@error('editordata') {{ $message }} @enderror</span><br>
             <button class="btn rounded-pill text-white fw-bold mt-2" style="background: linear-gradient(to right, #FE4F70 0%, #FFA387 100%);">PUBLISH</button>
