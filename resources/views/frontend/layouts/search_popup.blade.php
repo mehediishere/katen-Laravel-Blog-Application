@@ -8,8 +8,8 @@
             <h3 class="mb-4 mt-0">Press ESC to close</h3>
         </div>
         <!-- form -->
-        <form class="d-flex search-form" action="{{ route('frontend.search',['search']) }}" method="GET">
-            <input class="form-control me-2" type="search" name="search" placeholder="Search and press enter ..." aria-label="Search">
+        <form class="d-flex search-form" action="{{ route('frontend.search') }}" method="GET">
+            <input class="form-control me-2" type="search" name="for" placeholder="Search and press enter ..." aria-label="Search">
             <button class="btn btn-default btn-lg" type="submit"><i class="icon-magnifier"></i></button>
         </form>
     </div>

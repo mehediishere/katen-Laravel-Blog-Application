@@ -25,11 +25,8 @@ Route::controller(\App\Http\Controllers\BlogController::class)->group(function()
     Route::get('/post/{id}/{title}', 'singlePost')->name('frontend.post');
     Route::get('/about', 'about')->name('frontend.about');
     Route::get('/contact', 'contact')->name('frontend.contact');
-    Route::get('/{search}', 'searchPost')->name('frontend.search');
-
-
-    Route::get('/cpanel', 'createNewPost')->name('admin.index');
+    Route::get('/search/', 'searchPost')->name('frontend.search');
+    Route::get('/adminpage', 'createNewPost')->name('admin.index');
     Route::post('/new-post', 'newPost')->name('new.post');
-    Route::get('/all-post', 'allPost')->name('admin.allpost');
-
+    Route::get('/all', 'allPost')->name('admin.allpost');
 });

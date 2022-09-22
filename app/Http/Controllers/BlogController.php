@@ -30,9 +30,9 @@ class BlogController extends Controller
     }
 
     function createNewPost(){
-        $categoryList = BlogCategories::all();
-        return view('admin.pages.index', $categoryList);
+        return view('admin.pages.index');
     }
+
 
     function newPost(Request $request){
         $request->validate([
@@ -100,7 +100,7 @@ class BlogController extends Controller
     }
 
     function searchPost(Request $request){
-        $search = $request->search;
+        $search = $request->for;
         $result = Blog::where('title', 'like', '%'.$search.'%')->orWhere('category', 'like', '%'.$search.'%')->orWhere('tags', 'like', '%'.$search.'%')->paginate(10);
         return view('frontend.pages.search-posts', ['blogs'=>$result]);
 

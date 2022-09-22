@@ -14,9 +14,6 @@
                     <li class="nav-item {{ request()->is('single-blog') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('frontend.allpost') }}">Blog</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('admin.index') }}">cPanel</a>
-                    </li>
                     <li class="nav-item dropdown {{ request()->is('category') ? 'active' : '' }}">
                         <a class="nav-link dropdown-toggle" href="#">Categories</a>
                         <ul class="dropdown-menu">
@@ -31,6 +28,9 @@
                     </li>
                     <li class="nav-item {{ request()->is('contact') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('frontend.contact') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.index') }}">BackEnd</a>
                     </li>
                 </ul>
             </div>
