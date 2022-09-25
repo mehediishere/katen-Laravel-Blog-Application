@@ -16,12 +16,14 @@ class BlogController extends Controller
         $featurePost = Blog::orderBy('id', 'desc')->first();
         $topPickSpecial = Blog::orderBy('view_count', 'desc')->first();
         $topPick = Blog::orderBy('view_count', 'desc')->skip(1)->take(4)->get();
+        $trending = Blog::inRandomOrder()->limit(6)->get();
         return view('frontend.pages.index',[
             'popularPosts'=>$popularPosts,
             'recentPosts'=>$recentPosts,
             'featurePost'=>$featurePost,
             'topPickSpecial'=>$topPickSpecial,
             'topPick'=>$topPick,
+            'trending'=>$trending,
         ]);
     }
 
