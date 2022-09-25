@@ -27,6 +27,7 @@
                             <ul class="meta list-inline mb-0">
                                 <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/other/author-sm.png') }}" class="author" alt="author"/>Katen Doe</a></li>
                                 <li class="list-inline-item">{{ date('d M Y', strtotime($post->publish_date)) }}</li>
+                                <li class="list-inline-item"><i class="fas fa-book-reader"></i>&nbsp; {{ $post->view_count }}</li>
                             </ul>
                         </div>
                         <!-- featured image -->

@@ -17,22 +17,22 @@
                             <!-- post -->
                             <div class="post post-grid rounded bordered">
                                 <div class="thumb top-rounded">
-                                    <a href="category.html" class="category-badge position-absolute text-capitalize">{{ $blog->category }}</a>
+                                    <a href="{{ route('frontend.single.category', ['category'=>$blog->category]) }}" class="category-badge position-absolute text-capitalize">{{ $blog->category }}</a>
                                     <span class="post-format">
                                         <i class="icon-picture"></i>
                                     </span>
-                                    <a href="blog-single.html">
+                                    <a href="{{ route('frontend.post', ['id'=>$blog->id, 'title'=>$blog->title]) }}">
                                         <div class="inner">
-                                            <img src="frontend/images/posts/post-md-1.jpg" alt="post-title" />
+                                            <img src="{{ asset('frontend/images/posts/post-md-1.jpg') }}" alt="post-title" />
                                         </div>
                                     </a>
                                 </div>
                                 <div class="details">
                                     <ul class="meta list-inline mb-0">
-                                        <li class="list-inline-item"><a href="#"><img src="frontend/images/other/author-sm.png" class="author" alt="author"/>Katen Doe</a></li>
+                                        <li class="list-inline-item"><a href="#"><img src="{{ asset('frontend/images/other/author-sm.png') }}" class="author" alt="author"/>Katen Doe</a></li>
                                         <li class="list-inline-item">{{ date('d M Y', strtotime($blog->publish_date)) }}</li>
                                     </ul>
-                                    <h5 class="post-title mb-3 mt-3"><a href="{{ route('frontend.post', ['title'=>$blog->title, 'id'=>$blog->id]) }}">{{ $blog->title }}</a></h5>
+                                    <h5 class="post-title mb-3 mt-3"><a href="{{ route('frontend.post', ['id'=>$blog->id, 'title'=>$blog->title]) }}">{{ $blog->title }}</a></h5>
                                     <p class="excerpt mb-0">{{ \Illuminate\Support\Str::words(strip_tags($blog->post_details), 25, '...') }}</p>
                                 </div>
                                 <div class="post-bottom clearfix d-flex align-items-center">

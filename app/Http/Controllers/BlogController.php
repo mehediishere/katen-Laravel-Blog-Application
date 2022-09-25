@@ -3,29 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
-use App\Models\BlogCategories;
 use App\Models\Tags;
 use Illuminate\Http\Request;
-use Symfony\Component\Console\Input\Input;
+use Illuminate\Support\Facades\Cookie;
+use Illuminate\Support\Facades\File;
 
 class BlogController extends Controller
 {
     function index(){
-        return view('frontend.pages.index');
+        $popularPosts = Blog::orderBy('view_count', 'desc')->limit(4)->get();
+        $recentPosts = Blog::orderBy('id', 'desc')->limit(4)->get();
+        $featurePost = Blog::orderBy('id', 'desc')->first();
+        $topPickSpecial = Blog::orderBy('view_count', 'desc')->first();
+        $topPick = Blog::orderBy('view_count', 'desc')->skip(1)->take(4)->get();
+        return view('frontend.pages.index',[
+            'popularPosts'=>$popularPosts,
+            'recentPosts'=>$recentPosts,
+            'featurePost'=>$featurePost,
+            'topPickSpecial'=>$topPickSpecial,
+            'topPick'=>$topPick,
+        ]);
     }
 
     function allCategory(){
-        $blogs = Blog::orderBy('id', 'desc')->paginate(4);
+        $blogs = Blog::orderBy('id', 'desc')->paginate(6);
         return view('frontend.pages.all-posts', ['blogs'=>$blogs]);
     }
 
     function singleCategory($category){
-        $blogs = Blog::where('category', $category)->orderBy('id', 'desc')->paginate(4);
+        $blogs = Blog::where('category', $category)->orderBy('id', 'desc')->paginate(6);
         return view('frontend.pages.search-posts', ['blogs'=>$blogs]);
     }
 
     function tagPosts($tag){
-        $blogs = Blog::where('tags', 'LIKE', '%'.$tag.'%')->orderBy('id', 'desc')->paginate(4);
+        $blogs = Blog::where('tags', 'LIKE', '%'.$tag.'%')->orderBy('id', 'desc')->paginate(6);
         return view('frontend.pages.search-posts', ['blogs'=>$blogs]);
     }
 
@@ -81,9 +92,21 @@ class BlogController extends Controller
         return view('frontend.pages.blog-single');
     }
 
-    function singlePost($id, $title){
+    function singlePost($id){
         $post = Blog::where('id', $id)->first();
+
+        if(Cookie::has('readPost')){
+            if(Cookie::get('readPost') != $post->id){
+                Blog::where('id', $id)->update(['view_count'=>$post->view_count+1]);
+                Cookie::queue('readPost', $post->id, 10);
+            }
+        }else{
+            Blog::where('id', $id)->update(['view_count'=>$post->view_count+1]);
+            Cookie::queue('readPost', $post->id, 10);
+        }
+
         return view('frontend.pages.blog-single', ['post'=>$post]);
+
     }
 
     function contact(){
@@ -95,15 +118,22 @@ class BlogController extends Controller
     }
 
     function allPost(){
-        $blogs = Blog::all();
-        return view('admin.pages.all-posts', ['blogs'=>$blogs]);
+        $blogs = Blog::orderBy('id', 'desc')->paginate(10);
+        return view('admin.pages.blog-list', ['blogs'=>$blogs]);
     }
 
     function searchPost(Request $request){
         $search = $request->for;
         $result = Blog::where('title', 'like', '%'.$search.'%')->orWhere('category', 'like', '%'.$search.'%')->orWhere('tags', 'like', '%'.$search.'%')->paginate(10);
         return view('frontend.pages.search-posts', ['blogs'=>$result]);
+    }
 
+    function deletePost(Request $request){
+        if(File::exists(public_path('frontend/blog_feature/'.$request->image)) ) {
+            File::delete(public_path('frontend/blog_feature/'.$request->image));
+        }
+        Blog::where('id', $request->id)->delete();
+        return back();
     }
 
 }

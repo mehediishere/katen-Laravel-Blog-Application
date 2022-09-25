@@ -13,32 +13,23 @@
             <th scope="col">Category</th>
             <th scope="col">Tags</th>
             <th scope="col">Publish Date</th>
+            <th scope="col">Action</th>
         </tr>
         </thead>
         <tbody>
+        @foreach($blogs as $blog)
         <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th scope="row">{{ $blog->id }}</th>
+            <td>{{ $blog->title }}</td>
+            <td>{{ $blog->category }}</td>
+            <td>{{ $blog->tags }}</td>
+            <td>{{ $blog->publish_date }}</td>
+            <td><a href="{{ route('admin.delete.post',['id'=> $blog->id, 'image'=> $blog->feature_image]) }}" class="text-decoration-none">Delete</a></td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-        </tr>
+        @endforeach
         </tbody>
     </table>
+    {{ $blogs->links('vendor.pagination.bootstrap-5') }}
 </main>
 @endsection
 

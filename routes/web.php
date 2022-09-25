@@ -29,4 +29,5 @@ Route::controller(\App\Http\Controllers\BlogController::class)->group(function()
     Route::get('/adminpage', 'createNewPost')->name('admin.index');
     Route::post('/new-post', 'newPost')->name('new.post');
     Route::get('/all', 'allPost')->name('admin.allpost');
+    Route::get('/remove/', 'deletePost')->name('admin.delete.post');
 });

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('tags');
             $table->string('feature_image');
+            $table->integer('view_count');
             $table->text('post_details');
             $table->date('publish_date');
             $table->timestamps();
