@@ -1,5 +1,11 @@
 @extends('frontend.master')
 
+@section('meta-tags')
+<meta property="og:title" content="{{ $post->title }}" />
+    <meta property="og:description" content="{{ \Illuminate\Support\Str::words(strip_tags($post->post_details), 25, '...') }}" />
+    <meta property="og:image" content="https://web.telegram.org/70a77978-14c8-43fb-b2f8-d3880b891d26" />
+@endsection
+
 @section('pagecss')
 @endsection
 
