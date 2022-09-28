@@ -17,6 +17,8 @@ class BlogController extends Controller
         $topPickSpecial = Blog::orderBy('view_count', 'desc')->first();
         $topPick = Blog::orderBy('view_count', 'desc')->skip(1)->take(4)->get();
         $trending = Blog::inRandomOrder()->limit(6)->get();
+        $technology = Blog::where('category', 'technology')->orderBy('id', 'desc')->limit(6)->get();
+        $latestPosts = Blog::orderBy('id', 'desc')->limit(6)->get();
         return view('frontend.pages.index',[
             'popularPosts'=>$popularPosts,
             'recentPosts'=>$recentPosts,
@@ -24,6 +26,8 @@ class BlogController extends Controller
             'topPickSpecial'=>$topPickSpecial,
             'topPick'=>$topPick,
             'trending'=>$trending,
+            'technology'=>$technology,
+            'latestPosts'=>$latestPosts,
         ]);
     }
 
@@ -95,17 +99,23 @@ class BlogController extends Controller
     }
 
     function singlePost($id){
-        $post = Blog::where('id', $id)->first();
+        $post = Blog::find($id);
 
         if(Cookie::has('readPost')){
             if(Cookie::get('readPost') != $post->id){
-                Blog::where('id', $id)->update(['view_count'=>$post->view_count+1]);
+//                Blog::where('id', $id)->update(['view_count'=>$post->view_count+1]);
+//                or
+                Blog::find($id)->increment('view_count');
                 Cookie::queue('readPost', $post->id, 10);
             }
         }else{
-            Blog::where('id', $id)->update(['view_count'=>$post->view_count+1]);
+            Blog::find($id)->increment('view_count');
             Cookie::queue('readPost', $post->id, 10);
         }
+
+//        $post = Blog::where('id', $id)->first(); // Getting updated result
+//        or
+        $post = Blog::find($id);
 
         return view('frontend.pages.blog-single', ['post'=>$post]);
 
