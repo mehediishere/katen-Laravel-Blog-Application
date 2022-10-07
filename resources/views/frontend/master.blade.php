@@ -5,8 +5,8 @@
     <title>TechToe - A Blog For Tech</title>
     <meta name="description" content="TechToe - A Blog For Tech">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    @yield('meta-tags')
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('images/favicon.png') }}">
+
     {{-- STYLES --}}
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}" type="text/css" media="all">
     <link rel="stylesheet" href="{{ asset('frontend/css/all.min.css') }}" type="text/css" media="all">
@@ -35,7 +35,6 @@
     <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('frontend/js/slick.min.js') }}"></script>
     <script src="{{ asset('frontend/js/jquery.sticky-sidebar.min.js') }}"></script>
-    <script src="{{ asset('js/share.js') }}"></script>
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
     {{-- CUSTOM PAGE JS --}}
     @yield('pagejs')
