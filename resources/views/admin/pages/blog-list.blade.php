@@ -24,7 +24,7 @@
             <td>{{ $blog->category }}</td>
             <td>{{ $blog->tags }}</td>
             <td>{{ $blog->publish_date }}</td>
-            <td><a href="{{ route('admin.delete.post',['id'=> $blog->id, 'image'=> $blog->feature_image]) }}" class="text-decoration-none">Delete</a></td>
+            <td><a href="{{ route('admin.delete.post',['id'=> $blog->id, 'image'=> $blog->feature_image]) }}" class="text-decoration-none text-danger">Delete</a></td>
         </tr>
         @endforeach
         </tbody>
