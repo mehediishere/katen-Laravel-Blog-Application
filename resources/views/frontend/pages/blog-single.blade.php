@@ -1,5 +1,13 @@
 @extends('frontend.master')
 
+@section('meta-tags')
+<meta property="og:url" content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="{{ $post->title }}" />
+    <meta property="og:description" content="{{ \Illuminate\Support\Str::words(strip_tags($post->post_details), 25, '...') }}" />
+    <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
+@endsection
+
 @section('pagecss')
 @endsection
 

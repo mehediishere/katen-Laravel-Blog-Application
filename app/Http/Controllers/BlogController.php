@@ -7,6 +7,8 @@ use App\Models\Tags;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\File;
+use Illuminate\Http\RedirectResponse;
+use Jorenvh\Share\ShareFacade;
 
 class BlogController extends Controller
 {
@@ -29,6 +31,17 @@ class BlogController extends Controller
             'technology'=>$technology,
             'latestPosts'=>$latestPosts,
         ]);
+    }
+
+    function sharePost($id){
+        echo "Share"."<br>";
+        $shareComponent = ShareFacade::page(
+            'http://127.0.0.1:8000/post/12',
+            'Your share text comes here',
+        )->telegram()->getRawLinks();
+//        $post = Blog::find($id);
+
+        return new RedirectResponse($shareComponent);
     }
 
     function allCategory(){

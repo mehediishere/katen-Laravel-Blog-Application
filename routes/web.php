@@ -30,4 +30,5 @@ Route::controller(\App\Http\Controllers\BlogController::class)->group(function()
     Route::post('/new-post', 'newPost')->name('new.post');
     Route::get('/all', 'allPost')->name('admin.allpost');
     Route::get('/remove/', 'deletePost')->name('admin.delete.post');
+    Route::get('/share/{id}', 'sharePost')->name('frontend.share.post');
 });
